@@ -1,0 +1,7 @@
+to run local server:
+  node server.js
+  webpack -w
+
+to push changes to prod:
+  add, commit
+  git push heroku master

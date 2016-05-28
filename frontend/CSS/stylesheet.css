@@ -1,0 +1,118 @@
+html, body, header, nav, h1, a, ul, li,
+strong, main, section, img, div, h2, h3, h5, h6, p,
+form, fieldset, label, input, textarea,
+article, footer, small, h4 {
+ margin: 0;
+ padding: 0;
+ border: 0;
+ outline: 0;
+ font: inherit;
+ box-sizing: inherit;
+ text-align: inherit;
+ text-decoration: inherit;
+ vertical-align: inherit;
+ color: inherit;
+ background: transparent;
+}
+
+.group:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.images {
+  margin: auto;
+  width: 300px;
+  text-align: center;
+}
+.reportHeader {
+  background-color: darkblue;
+  color: white;
+}
+.hrefs{
+  color: darkblue;
+  font-style: italic;
+  margin: 20px;
+}
+.hrefs:hover {
+  text-decoration: underline;
+  color: green;
+}
+.reportHeader h1 {
+  font-size: 20px;
+}
+.displayBox{
+  margin: auto;
+  width: 300px;
+  text-align: center;
+  border: 1px solid black;
+}
+.reportTable td{
+  width: 300px;
+}
+
+.txt-input {
+
+}
+
+.txt-input input {
+  border: 1px solid #ccc;
+  margin-left: 10px;
+}
+
+.txt-input label {
+  overflow: auto;
+}
+
+.txt-input-2col {
+  column-count: 1;
+  column-width: 50%;
+  line-height: 22px;
+  margin-bottom: 4px;
+  /* display: table-cell; */
+  vertical-align: bottom;
+}
+
+.txt-input-2col label {
+    display: inline-block;
+    width: 140px;
+    text-align: right;
+    margin-left: 5px;
+}
+
+.txt-input-2col input {
+  box-shadow: 0 0 3px;
+  margin-left: 5px;
+}
+
+.txt-input-3col {
+  column-count: 1;
+  column-width: 33%;
+  line-height: 22px;
+  margin-bottom: 4px;
+  vertical-align: bottom;
+}
+
+.txt-input-3col label {
+  display: inline-block;
+  width: 140px;
+  text-align: right;
+  margin-left: 5px;
+}
+
+.txt-input-3col input {
+  box-shadow: 0 0 3px;
+}
+
+.txt-Display {
+  font-size: 20px;
+}
+
+.checkboxes label {
+  text-align: left;
+}
+
+.riskTable {
+  width:auto;
+  column-width:25%;
+}
