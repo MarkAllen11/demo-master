@@ -15,7 +15,7 @@ var Scoring = React.createClass({
   return (
     <div className="Scoring">
     <div className="images">
-      <img src="images/valen.png" />
+      <img src="images/Valen.png" />
     </div>
 
     <div className="form-group">

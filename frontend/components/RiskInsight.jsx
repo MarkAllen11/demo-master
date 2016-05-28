@@ -15,7 +15,7 @@ var RiskInsight = React.createClass({
 
       <div className="RiskInsight">
       <div className="images">
-        <img src="images/valen.png" />
+        <img src="images/Valen.png" />
       </div>
       <table caption="Risk Analysis">
       <thead>

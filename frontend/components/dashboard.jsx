@@ -17,7 +17,7 @@ var Dashboard = React.createClass({
 
       <div className="Dashboard">
       <div className="images">
-        <img src="images/indenseo_logo.png" />
+        <img src="images/Indenseo_Logo.png" />
       </div>
       <div className="displayBox">
         <h1>Customer Portal and Dashboard</h1>

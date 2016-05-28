@@ -27265,7 +27265,7 @@
 	      React.createElement(
 	        'div',
 	        { className: 'images' },
-	        React.createElement('img', { src: 'images/indenseo_logo.png' })
+	        React.createElement('img', { src: 'images/Indenseo_Logo.png' })
 	      ),
 	      React.createElement(
 	        'div',
@@ -28299,7 +28299,7 @@
 	      React.createElement(
 	        'div',
 	        { className: 'images' },
-	        React.createElement('img', { src: 'images/valen.png' })
+	        React.createElement('img', { src: 'images/Valen.png' })
 	      ),
 	      React.createElement(
 	        'div',
@@ -28589,7 +28589,7 @@
 	      React.createElement(
 	        'div',
 	        { className: 'images' },
-	        React.createElement('img', { src: 'images/valen.png' })
+	        React.createElement('img', { src: 'images/Valen.png' })
 	      ),
 	      React.createElement(
 	        'table',
@@ -28681,7 +28681,7 @@
 	      React.createElement(
 	        'div',
 	        { className: 'images' },
-	        React.createElement('img', { src: 'images/indenseo_logo.png' })
+	        React.createElement('img', { src: 'images/Indenseo_Logo.png' })
 	      ),
 	      React.createElement(
 	        'div',

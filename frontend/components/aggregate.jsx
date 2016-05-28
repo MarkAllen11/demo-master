@@ -63,7 +63,7 @@ var Aggregate = React.createClass({
       return (
       <div className="Aggreagate">
         <div className="images">
-          <img src="images/indenseo_logo.png" />
+          <img src="images/Indenseo_Logo.png" />
         </div>
         <div className="txt-input">
           <div className="txt-input-2col">
