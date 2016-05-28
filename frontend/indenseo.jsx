@@ -6,9 +6,9 @@ var Aggregate = require('./components/aggregate');
 var VehicleClass = require('./components/vehicleClass');
 var Retrieve = require('./components/retreive');
 var IRReport = require('./components/IRReport');
-var Scoring = require('./components/Scoring');
+var Scoring = require('./components/scoring');
 var RiskInsight = require('./components/RiskInsight');
-var Dashboard = require('./components/Dashboard');
+var Dashboard = require('./components/dashboard');
 
 
 var App = React.createClass({
