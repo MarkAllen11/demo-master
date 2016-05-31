@@ -48,13 +48,14 @@
 	var ReactDOM = __webpack_require__(38);
 	var AppStore = __webpack_require__(168);
 	var Navbar = __webpack_require__(191);
-	var Aggregate = __webpack_require__(192);
-	var VehicleClass = __webpack_require__(198);
-	var Retrieve = __webpack_require__(199);
-	var IRReport = __webpack_require__(200);
-	var Scoring = __webpack_require__(201);
-	var RiskInsight = __webpack_require__(202);
-	var Dashboard = __webpack_require__(203);
+	var Index = __webpack_require__(192);
+	var Aggregate = __webpack_require__(193);
+	var VehicleClass = __webpack_require__(199);
+	var Retrieve = __webpack_require__(200);
+	var IRReport = __webpack_require__(201);
+	var Scoring = __webpack_require__(202);
+	var RiskInsight = __webpack_require__(203);
+	var Dashboard = __webpack_require__(204);
 	
 	var App = React.createClass({
 	  displayName: 'App',
@@ -78,7 +79,7 @@
 	
 	  render: function () {
 	
-	    var pages = [React.createElement(Aggregate, null), React.createElement(Scoring, null), React.createElement(RiskInsight, null), React.createElement(IRReport, null), React.createElement(Dashboard, null)];
+	    var pages = [React.createElement(Index, null), React.createElement(Scoring, null), React.createElement(Aggregate, null), React.createElement(IRReport, null), React.createElement(RiskInsight, null), React.createElement(Dashboard, null)];
 	
 	    return React.createElement(
 	      'div',
@@ -27199,23 +27200,338 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var AppActions = __webpack_require__(193);
-	var LinkedStateMixin = __webpack_require__(194);
+	var AppActions = __webpack_require__(194);
+	var LinkedStateMixin = __webpack_require__(195);
+	var AppStore = __webpack_require__(168);
+	
+	var Index = React.createClass({
+	  displayName: 'Index',
+	
+	  mixins: [LinkedStateMixin],
+	  getInitialState: function () {
+	    return {
+	      insName: AppStore.getReportInfo().insName || "",
+	      effDate: AppStore.getReportInfo().effDate || "",
+	      garAddr: AppStore.getReportInfo().garAddr || ""
+	    };
+	  },
+	  _nextPage: function () {
+	    AppActions.updateReportInfo({
+	      insName: this.state.insName,
+	      effDate: this.state.effDate,
+	      garAddr: this.state.garAddr
+	    });
+	    AppActions.changePage(1);
+	  },
+	  render: function () {
+	
+	    return React.createElement(
+	      'div',
+	      { className: 'Index' },
+	      React.createElement(
+	        'div',
+	        { className: 'images' },
+	        React.createElement('img', { src: 'images/Indenseo_Logo.png' })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'reportHeader' },
+	        'BUSINESS INFO'
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'txt-input-2col' },
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'name' },
+	          'Business Name'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'name', valueLink: this.linkState('insName') }),
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'fein' },
+	          'FEIN/SSN'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'fein' })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'txt-input-2col' },
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'address' },
+	          'Business Address'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'address', valueLink: this.linkState('garAddr') }),
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'loc' },
+	          'Business Locations'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'loc' })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'txt-input-2col' },
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'effectdate' },
+	          'Effective Date'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'effectdate', valueLink: this.linkState('effDate') }),
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'expDate' },
+	          'Expiration Date'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'expdate' })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'txt-input-2col' },
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'sic' },
+	          'SIC'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'sic' })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'reportHeader' },
+	        'COVERAGES REQUESTED'
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'txt-input-2col' },
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'liability' },
+	          'Liability Limits'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'liability' }),
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'pdliabilty' },
+	          'PD Liability Limits'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'pdliabilty' })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'txt-input-2col' },
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'uimlimits' },
+	          'UM and UIM Limits'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'uimlimits' }),
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'compdeduct' },
+	          'Comprehensive Deductible'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'compdeduct' })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'txt-input-2col' },
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'colldeduct' },
+	          'Collission Deductible'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'colldeduct' }),
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'othext' },
+	          'Other Coverage Extensions'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'othext' })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'reportHeader' },
+	        'VEHICLE INFO'
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'txt-input-2col' },
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'yrmakemod' },
+	          'Year/make/Model'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'yrmkmod' }),
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'weight' },
+	          'Weight'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'weight' })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'txt-input-2col' },
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'vin' },
+	          'VIN'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'vin' }),
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'zip' },
+	          'Zip Code Operated In'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'zip' })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'txt-input-2col' },
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'radius' },
+	          'Radius Traveled'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'radius' }),
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'loanholder' },
+	          'Loan Holder'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'loanholder' })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'reportHeader' },
+	        'DRIVER INFO'
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'txt-input-2col' },
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'dname' },
+	          'Name'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'dname' }),
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'daddress' },
+	          'Address'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'daddress' })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'txt-input-2col' },
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'dage' },
+	          'Age'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'dage' }),
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'dlicense' },
+	          'License #'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'dlicense' })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'txt-input-2col' },
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'dviolations' },
+	          'Violations'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'dviolations' }),
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'datfaultacc' },
+	          'At Fault Accidents'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'datfaultacc' })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'txt-input-2col' },
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'dotheracc' },
+	          'Other Accidents'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'dotheracc' })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'reportHeader' },
+	        'LOSS HISTORY'
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'txt-input-2col' },
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'lh3years' },
+	          'Min 3 Years of Loss Runs'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'lh3years' })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'reportHeader' },
+	        'UNDERWRITING QUESTIONS'
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'txt-input-2col' },
+	        React.createElement(
+	          'label',
+	          { htmlfor: 'prevcov' },
+	          'Previous Insurance Coverage and Carrier'
+	        ),
+	        React.createElement('input', { type: 'text', id: 'prevcov' })
+	      ),
+	      React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          'button',
+	          { onClick: this._nextPage },
+	          'Submit'
+	        )
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = Index;
+
+/***/ },
+/* 193 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var AppActions = __webpack_require__(194);
+	var LinkedStateMixin = __webpack_require__(195);
+	var AppStore = __webpack_require__(168);
 	
 	var Aggregate = React.createClass({
 	  displayName: 'Aggregate',
 	
 	  mixins: [LinkedStateMixin],
-	
 	  getInitialState: function () {
 	    return {
+	      insName: AppStore.getReportInfo().insName || "",
+	      effDate: AppStore.getReportInfo().effDate || "",
+	      garAddr: AppStore.getReportInfo().garAddr || "",
 	      ref: "",
-	      effDate: "",
 	      new: "",
 	      underwriter: "",
-	      insName: "",
-	      agent: "",
-	      garAddr: "",
 	      dot: "",
 	      garState: "",
 	      garZip: "",
@@ -27226,12 +27542,10 @@
 	      totUnits: "",
 	      totPrem: "",
 	      totPowerUnits: "",
-	      totLiabPrem: "",
 	      totTrailers: "",
 	      totUnitsPriorTerm: ""
 	    };
 	  },
-	
 	  _addRow: function () {
 	    var newRow = "<tr class='data_row'>";
 	    for (var i = 0; i < 6; i++) {
@@ -27240,7 +27554,9 @@
 	    newRow += "</tr>";
 	    $('.vehicleTable tr:last').after(newRow);
 	  },
-	
+	  _prevPage: function () {
+	    AppActions.changePage(1);
+	  },
 	  _nextPage: function () {
 	    AppActions.updateReportInfo({
 	      ref: this.state.ref,
@@ -27251,21 +27567,24 @@
 	      claimCount: this.state.claimCount,
 	      twoYrClaimCount: this.state.twoYrClaimCount,
 	      threeYrClaimCount: this.state.threeYrClaimCount
+	
 	    });
 	
-	    AppActions.changePage(1);
+	    AppActions.changePage(3);
 	  },
 	
 	  _tableRows: function () {},
 	
 	  render: function () {
+	    var info = AppStore.getReportInfo();
+	
 	    return React.createElement(
 	      'div',
 	      { className: 'Aggreagate' },
 	      React.createElement(
 	        'div',
 	        { className: 'images' },
-	        React.createElement('img', { src: 'images/Indenseo_Logo.png' })
+	        React.createElement('img', { src: 'images/Valen.png' })
 	      ),
 	      React.createElement(
 	        'div',
@@ -27284,7 +27603,7 @@
 	            { htmlfor: 'effDate' },
 	            '   Policy Effective Date'
 	          ),
-	          React.createElement('input', { type: 'text', id: 'effDate', valueLink: this.linkState('effDate') })
+	          React.createElement('input', { type: 'text', id: 'effDate', value: this.effDate, valueLink: this.linkState('effDate') })
 	        ),
 	        React.createElement(
 	          'div',
@@ -27310,7 +27629,7 @@
 	            { htmlfor: 'insName' },
 	            'Insured Name'
 	          ),
-	          React.createElement('input', { type: 'text', id: 'insName', valueLink: this.linkState('insName') }),
+	          React.createElement('input', { type: 'text', id: 'insName', value: this.insName, valueLink: this.linkState('insName') }),
 	          React.createElement(
 	            'label',
 	            { htmlfor: 'agent' },
@@ -27326,7 +27645,7 @@
 	            { htmlfor: 'garAddr' },
 	            'Primary Garage Address'
 	          ),
-	          React.createElement('input', { type: 'text', id: 'garAddr', valueLink: this.linkState('garAddr') }),
+	          React.createElement('input', { type: 'text', id: 'garAddr', value: this.garAddr, valueLink: this.linkState('garAddr') }),
 	          React.createElement(
 	            'label',
 	            { htmlfor: 'dot' },
@@ -27501,11 +27820,20 @@
 	            )
 	          )
 	        ),
-	        React.createElement('br', null),
 	        React.createElement(
-	          'button',
-	          { onClick: this._nextPage },
-	          'Submit'
+	          'div',
+	          { className: 'submitButton' },
+	          React.createElement(
+	            'button',
+	            { onClick: this._prevPage },
+	            'Back'
+	          ),
+	          " ",
+	          React.createElement(
+	            'button',
+	            { onClick: this._nextPage },
+	            'Submit'
+	          )
 	        )
 	      )
 	    );
@@ -27516,7 +27844,7 @@
 	module.exports = Aggregate;
 
 /***/ },
-/* 193 */
+/* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var AppDispatcher = __webpack_require__(187);
@@ -27545,13 +27873,13 @@
 	module.exports = AppActions;
 
 /***/ },
-/* 194 */
+/* 195 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(195);
+	module.exports = __webpack_require__(196);
 
 /***/ },
-/* 195 */
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -27567,8 +27895,8 @@
 	
 	'use strict';
 	
-	var ReactLink = __webpack_require__(196);
-	var ReactStateSetters = __webpack_require__(197);
+	var ReactLink = __webpack_require__(197);
+	var ReactStateSetters = __webpack_require__(198);
 	
 	/**
 	 * A simple mixin around ReactLink.forState().
@@ -27592,7 +27920,7 @@
 	module.exports = LinkedStateMixin;
 
 /***/ },
-/* 196 */
+/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -27668,7 +27996,7 @@
 	module.exports = ReactLink;
 
 /***/ },
-/* 197 */
+/* 198 */
 /***/ function(module, exports) {
 
 	/**
@@ -27777,11 +28105,11 @@
 	module.exports = ReactStateSetters;
 
 /***/ },
-/* 198 */
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var AppActions = __webpack_require__(193);
+	var AppActions = __webpack_require__(194);
 	
 	var VehicleClass = React.createClass({
 	  displayName: 'VehicleClass',
@@ -28020,11 +28348,11 @@
 	module.exports = VehicleClass;
 
 /***/ },
-/* 199 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var AppActions = __webpack_require__(193);
+	var AppActions = __webpack_require__(194);
 	
 	var Retreive = React.createClass({
 	  displayName: 'Retreive',
@@ -28047,19 +28375,19 @@
 	module.exports = Retreive;
 
 /***/ },
-/* 200 */
+/* 201 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var AppActions = __webpack_require__(193);
+	var AppActions = __webpack_require__(194);
 	var AppStore = __webpack_require__(168);
 	
 	var IRReport = React.createClass({
 	  displayName: 'IRReport',
 	
 	
-	  _firstPage: function () {
-	    AppActions.changePage(0);
+	  _prevPage: function () {
+	    AppActions.changePage(2);
 	  },
 	  _nextPage: function () {
 	    AppActions.changePage(4);
@@ -28197,7 +28525,7 @@
 	            React.createElement(
 	              'td',
 	              null,
-	              info.ClaimCount
+	              info.claimCount
 	            )
 	          ),
 	          React.createElement(
@@ -28262,9 +28590,19 @@
 	        )
 	      ),
 	      React.createElement(
-	        'button',
-	        { onClick: this._nextPage },
-	        'Customer Portal'
+	        'div',
+	        { className: 'submitButton' },
+	        React.createElement(
+	          'button',
+	          { onClick: this._prevPage },
+	          'Back'
+	        ),
+	        " ",
+	        React.createElement(
+	          'button',
+	          { onClick: this._nextPage },
+	          'Submit'
+	        )
 	      )
 	    );
 	  }
@@ -28274,18 +28612,18 @@
 	module.exports = IRReport;
 
 /***/ },
-/* 201 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var AppActions = __webpack_require__(193);
+	var AppActions = __webpack_require__(194);
 	var AppStore = __webpack_require__(168);
 	
 	var Scoring = React.createClass({
 	  displayName: 'Scoring',
 	
 	
-	  _firstPage: function () {
+	  _prevPage: function () {
 	    AppActions.changePage(0);
 	  },
 	  _nextPage: function () {
@@ -28299,11 +28637,11 @@
 	      React.createElement(
 	        'div',
 	        { className: 'images' },
-	        React.createElement('img', { src: 'images/Valen.png' })
+	        React.createElement('img', { src: 'images/Indenseo_Logo.png' })
 	      ),
 	      React.createElement(
 	        'div',
-	        { className: 'form-group' },
+	        { className: 'reportHeader' },
 	        React.createElement(
 	          'label',
 	          { htmlfor: 'name' },
@@ -28312,7 +28650,7 @@
 	      ),
 	      React.createElement(
 	        'div',
-	        { className: 'txt-input-3col' },
+	        { className: 'riskTable' },
 	        React.createElement(
 	          'table',
 	          { caption: 'Risk Analysis' },
@@ -28517,10 +28855,10 @@
 	            ),
 	            React.createElement(
 	              'tr',
-	              null,
+	              { border: 'none' },
 	              React.createElement(
 	                'td',
-	                { colspan: '3' },
+	                { colspan: '4' },
 	                ' '
 	              )
 	            ),
@@ -28549,8 +28887,18 @@
 	              )
 	            )
 	          )
+	        )
+	      ),
+	      React.createElement('br', null),
+	      React.createElement(
+	        'div',
+	        { className: 'submitButton' },
+	        React.createElement(
+	          'button',
+	          { onClick: this._prevPage },
+	          'Back'
 	        ),
-	        React.createElement('br', null),
+	        " ",
 	        React.createElement(
 	          'button',
 	          { onClick: this._nextPage },
@@ -28565,22 +28913,22 @@
 	module.exports = Scoring;
 
 /***/ },
-/* 202 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var AppActions = __webpack_require__(193);
+	var AppActions = __webpack_require__(194);
 	var AppStore = __webpack_require__(168);
 	
 	var RiskInsight = React.createClass({
 	  displayName: 'RiskInsight',
 	
 	
-	  _firstPage: function () {
-	    AppActions.changePage(0);
+	  _prevPage: function () {
+	    AppActions.changePage(3);
 	  },
 	  _nextPage: function () {
-	    AppActions.changePage(3);
+	    AppActions.changePage(5);
 	  },
 	  render: function () {
 	    return React.createElement(
@@ -28588,64 +28936,183 @@
 	      { className: 'RiskInsight' },
 	      React.createElement(
 	        'div',
-	        { className: 'images' },
-	        React.createElement('img', { src: 'images/Valen.png' })
-	      ),
-	      React.createElement(
-	        'table',
-	        { caption: 'Risk Analysis' },
+	        { className: 'riskTableHighlight' },
 	        React.createElement(
-	          'thead',
-	          null,
+	          'table',
+	          { caption: 'Preferred' },
 	          React.createElement(
-	            'tr',
+	            'thead',
 	            null,
 	            React.createElement(
-	              'th',
+	              'tr',
 	              null,
-	              'ISO Base Rate'
-	            ),
-	            React.createElement(
-	              'th',
-	              null,
-	              'PREFERRED COMPANY'
-	            ),
-	            React.createElement(
-	              'th',
-	              null,
-	              'Indicated Price'
+	              React.createElement(
+	                'th',
+	                null,
+	                'ISO Base Rate'
+	              ),
+	              React.createElement(
+	                'th',
+	                null,
+	                'PREFERRED COMPANY'
+	              ),
+	              React.createElement(
+	                'th',
+	                null,
+	                'Indicated Price'
+	              )
 	            )
-	          )
-	        ),
-	        React.createElement(
-	          'tbody',
-	          null,
+	          ),
 	          React.createElement(
-	            'tr',
+	            'tbody',
 	            null,
 	            React.createElement(
-	              'td',
+	              'tr',
 	              null,
-	              '$50000'
-	            ),
-	            React.createElement(
-	              'td',
-	              null,
-	              '.90'
-	            ),
-	            React.createElement(
-	              'td',
-	              null,
-	              '$45000'
+	              React.createElement(
+	                'td',
+	                null,
+	                '$50000'
+	              ),
+	              React.createElement(
+	                'td',
+	                null,
+	                '.90'
+	              ),
+	              React.createElement(
+	                'td',
+	                null,
+	                '$45000'
+	              )
 	            )
 	          )
 	        )
 	      ),
 	      React.createElement('br', null),
 	      React.createElement(
-	        'button',
-	        { onClick: this._nextPage },
-	        'Submit'
+	        'div',
+	        { className: 'riskTable' },
+	        React.createElement(
+	          'table',
+	          { caption: 'Base' },
+	          React.createElement(
+	            'thead',
+	            null,
+	            React.createElement(
+	              'tr',
+	              null,
+	              React.createElement(
+	                'th',
+	                null,
+	                'ISO Base Rate'
+	              ),
+	              React.createElement(
+	                'th',
+	                null,
+	                'BASE RATE COMPANY'
+	              ),
+	              React.createElement(
+	                'th',
+	                null,
+	                'Indicated Price'
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'tbody',
+	            null,
+	            React.createElement(
+	              'tr',
+	              null,
+	              React.createElement(
+	                'td',
+	                null,
+	                '$50000'
+	              ),
+	              React.createElement(
+	                'td',
+	                null,
+	                '1.0'
+	              ),
+	              React.createElement(
+	                'td',
+	                null,
+	                '$50000'
+	              )
+	            )
+	          )
+	        )
+	      ),
+	      React.createElement('br', null),
+	      React.createElement(
+	        'div',
+	        { className: 'riskTable' },
+	        React.createElement(
+	          'table',
+	          { caption: 'Surcharge' },
+	          React.createElement(
+	            'thead',
+	            null,
+	            React.createElement(
+	              'tr',
+	              null,
+	              React.createElement(
+	                'th',
+	                null,
+	                'ISO Base Rate'
+	              ),
+	              React.createElement(
+	                'th',
+	                null,
+	                'SURCHARGE COMPANY'
+	              ),
+	              React.createElement(
+	                'th',
+	                null,
+	                'Indicated Price'
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'tbody',
+	            null,
+	            React.createElement(
+	              'tr',
+	              null,
+	              React.createElement(
+	                'td',
+	                null,
+	                '$50000'
+	              ),
+	              React.createElement(
+	                'td',
+	                null,
+	                '1.10'
+	              ),
+	              React.createElement(
+	                'td',
+	                null,
+	                '$55000'
+	              )
+	            )
+	          )
+	        )
+	      ),
+	      React.createElement('br', null),
+	      React.createElement(
+	        'div',
+	        { className: 'submitButton' },
+	        React.createElement(
+	          'button',
+	          { onClick: this._prevPage },
+	          'Back'
+	        ),
+	        " ",
+	        React.createElement(
+	          'button',
+	          { onClick: this._nextPage },
+	          'Submit'
+	        )
 	      )
 	    );
 	  }
@@ -28655,11 +29122,11 @@
 	module.exports = RiskInsight;
 
 /***/ },
-/* 203 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var AppActions = __webpack_require__(193);
+	var AppActions = __webpack_require__(194);
 	var AppStore = __webpack_require__(168);
 	
 	var Dashboard = React.createClass({
@@ -28669,10 +29136,30 @@
 	    alert("Coming Soon");
 	  },
 	  _firstPage: function () {
+	    AppActions.updateReportInfo({
+	      insName: "",
+	      effDate: "",
+	      ref: "",
+	      new: "",
+	      underwriter: "",
+	      garAddr: "",
+	      dot: "",
+	      garState: "",
+	      garZip: "",
+	      claimCount: "",
+	      twoYrClaimCount: "",
+	      threeYrClaimCount: "",
+	      primVehClass: "",
+	      totUnits: "",
+	      totPrem: "",
+	      totPowerUnits: "",
+	      totTrailers: "",
+	      totUnitsPriorTerm: ""
+	    });
 	    AppActions.changePage(0);
 	  },
-	  _nextPage: function () {
-	    AppActions.changePage(3);
+	  _prevPage: function () {
+	    AppActions.changePage(4);
 	  },
 	  render: function () {
 	    return React.createElement(
@@ -28733,9 +29220,19 @@
 	        'Best Practive Guidance'
 	      ),
 	      React.createElement(
-	        'button',
-	        { onClick: this._firstPage },
-	        'Start Over'
+	        'div',
+	        { className: 'submitButton' },
+	        React.createElement(
+	          'button',
+	          { onClick: this._prevPage },
+	          'Back'
+	        ),
+	        " ",
+	        React.createElement(
+	          'button',
+	          { onClick: this._firstPage },
+	          'Start Over'
+	        )
 	      )
 	    );
 	  }

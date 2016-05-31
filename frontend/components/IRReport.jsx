@@ -4,8 +4,8 @@ var AppStore = require('../stores/appStore');
 
 var IRReport = React.createClass({
 
-  _firstPage: function() {
-    AppActions.changePage(0);
+  _prevPage: function() {
+    AppActions.changePage(2);
   },
   _nextPage: function() {
     AppActions.changePage(4);
@@ -34,7 +34,7 @@ var IRReport = React.createClass({
             <tr><td>Policy Reference:</td><td>{info.ref}</td><td>DOT</td><td>{info.dot}</td></tr>
             <tr><td>Policy Effective Date:</td><td>{info.effDate}</td></tr>
             <tr><td>Insured Name:</td><td>{info.insName}</td></tr>
-            <tr><td>Insured Address:</td><td>{info.garAddr}</td><td>Expiring Term Claim Count</td><td>{info.ClaimCount}</td></tr>
+            <tr><td>Insured Address:</td><td>{info.garAddr}</td><td>Expiring Term Claim Count</td><td>{info.claimCount}</td></tr>
             <tr><td></td><td>Anytown, USA</td><td>2 yr Expiring Term Claim Count</td><td>{info.twoYrClaimCount}</td></tr>
             <tr><td></td><td></td><td>3 yr Expiring Term Claim Count</td><td>{info.threeYrClaimCount}</td></tr>
           </tbody>
@@ -47,7 +47,10 @@ var IRReport = React.createClass({
           <p width='300px' align='center'>{score}</p>
         </div>
 
-        <button onClick={this._nextPage}>Customer Portal</button>
+        <div className="submitButton">
+          <button onClick={this._prevPage}>Back</button>{" "}
+          <button onClick={this._nextPage}>Submit</button>
+        </div>
       </div>
     );
   }

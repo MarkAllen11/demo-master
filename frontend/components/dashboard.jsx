@@ -7,10 +7,30 @@ var Dashboard = React.createClass({
     alert("Coming Soon");
   },
   _firstPage: function() {
+    AppActions.updateReportInfo({
+       insName: "",
+       effDate: "",
+       ref: "",
+       new: "",
+       underwriter: "",
+       garAddr: "",
+       dot: "",
+       garState: "",
+       garZip: "",
+       claimCount: "",
+       twoYrClaimCount: "",
+       threeYrClaimCount: "",
+       primVehClass: "",
+       totUnits: "",
+       totPrem: "",
+       totPowerUnits: "",
+       totTrailers: "",
+       totUnitsPriorTerm: ""
+     });
     AppActions.changePage(0);
   },
-  _nextPage: function () {
-      AppActions.changePage(3);
+  _prevPage: function () {
+      AppActions.changePage(4);
   },
   render: function () {
     return (
@@ -31,7 +51,10 @@ var Dashboard = React.createClass({
       <a className="hrefs" href="http://idrivesafely.cust.footprint.net/CoPilot/SC05/story.html" target="_blank">Online Targeted Driver Training</a>
       <br />
       <div className="hrefs" onClick={this._comingSoon}>Best Practive Guidance</div>
-      <button onClick={this._firstPage}>Start Over</button>
+      <div className="submitButton">
+        <button onClick={this._prevPage}>Back</button>{" "}
+        <button onClick={this._firstPage}>Start Over</button>
+      </div>
       </div>
     );
   }

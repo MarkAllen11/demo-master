@@ -14,7 +14,10 @@ article, footer, small, h4 {
  color: inherit;
  background: transparent;
 }
+.submitButton {
+  margin-left: 10px;
 
+}
 .group:after {
   content: "";
   display: block;
@@ -28,6 +31,9 @@ article, footer, small, h4 {
 .reportHeader {
   background-color: darkblue;
   color: white;
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px 0px;
 }
 .hrefs{
   color: darkblue;
@@ -47,39 +53,53 @@ article, footer, small, h4 {
   text-align: center;
   border: 1px solid black;
 }
+.riskTableHighlight th{
+  width: 125px;
+  text-align: center;
+  border: 3px solid darkblue;
+  color: darkblue;
+}
+.riskTableHighlight td{
+  width: 125px;
+  text-align: center;
+  border: 3px solid darkblue;
+  color: darkblue;
+}
+.riskTable th{
+  width: 125px;
+  text-align: center;
+  border: 3px solid black;
+}
+.riskTable td{
+  width: 125px;
+  text-align: center;
+  border: 3px solid black;
+}
 .reportTable td{
   width: 300px;
 }
-
 .txt-input {
-
 }
-
 .txt-input input {
   border: 1px solid #ccc;
   margin-left: 10px;
 }
-
 .txt-input label {
   overflow: auto;
 }
-
 .txt-input-2col {
   column-count: 1;
   column-width: 50%;
   line-height: 22px;
   margin-bottom: 4px;
-  /* display: table-cell; */
   vertical-align: bottom;
 }
-
 .txt-input-2col label {
     display: inline-block;
     width: 140px;
     text-align: right;
     margin-left: 5px;
 }
-
 .txt-input-2col input {
   box-shadow: 0 0 3px;
   margin-left: 5px;
