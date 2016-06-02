@@ -6,10 +6,13 @@ var LinkedStateMixin = require('react-addons-linked-state-mixin');
 var Login = React.createClass({
   mixins: [LinkedStateMixin],
   _validCredentials: function(u,p) {
-    return (u === "indenseo" && p === "438in03");
+    return (u === "indenseo" && p === 420590337);
   },
   componentDidMount: function(){
     document.getElementById("uname").focus();
+  },
+  _hashPwd: function(s){
+    return s.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);
   },
   getInitialState: function () {
     return ({
@@ -18,7 +21,7 @@ var Login = React.createClass({
     });
   },
   _nextPage: function () {
-    if (this._validCredentials(this.state.uname , this.state.pwd ))
+    if (this._validCredentials(this.state.uname , this._hashPwd(this.state.pwd )))
       {
         AppActions.changePage(1);
       } else
