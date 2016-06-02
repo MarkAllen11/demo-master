@@ -27,10 +27,10 @@ var Dashboard = React.createClass({
        totTrailers: "",
        totUnitsPriorTerm: ""
      });
-    AppActions.changePage(0);
+    AppActions.changePage(1);
   },
   _prevPage: function () {
-      AppActions.changePage(4);
+      AppActions.changePage(7);
   },
   render: function () {
     return (

@@ -2,15 +2,14 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var AppStore = require('./stores/appStore');
 var Navbar = require('./components/navbar');
+var Login = require('./components/Login');
 var Index = require('./components/index');
 var Aggregate = require('./components/aggregate');
 var VehicleClass = require('./components/vehicleClass');
-var Retrieve = require('./components/retreive');
 var IRReport = require('./components/IRReport');
 var Scoring = require('./components/scoring');
 var RiskInsight = require('./components/RiskInsight');
 var Dashboard = require('./components/dashboard');
-
 
 var App = React.createClass({
 
@@ -32,7 +31,7 @@ var App = React.createClass({
 
   render: function () {
 
-    var pages = [<Index /> , <Scoring />, <Aggregate />, <IRReport />, <RiskInsight />, <Dashboard />];
+    var pages = [<Login />, <Index /> , <Scoring />, <Aggregate />, <IRReport />, <RiskInsight />, <Dashboard />];
 
     return (
       <div className="main-container">

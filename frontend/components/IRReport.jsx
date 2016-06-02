@@ -5,10 +5,10 @@ var AppStore = require('../stores/appStore');
 var IRReport = React.createClass({
 
   _prevPage: function() {
-    AppActions.changePage(2);
+    AppActions.changePage(3);
   },
   _nextPage: function() {
-    AppActions.changePage(4);
+    AppActions.changePage(5);
   },
 
   render: function () {

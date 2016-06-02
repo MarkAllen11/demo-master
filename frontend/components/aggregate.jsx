@@ -5,6 +5,9 @@ var AppStore = require('../stores/appStore');
 
 var Aggregate = React.createClass({
   mixins: [LinkedStateMixin],
+  componentDidMount: function(){
+    document.getElementById("ref").focus();
+  },
   getInitialState: function () {
     return ({
       insName: AppStore.getReportInfo().insName || "",
@@ -36,7 +39,7 @@ var Aggregate = React.createClass({
     $('.vehicleTable tr:last').after(newRow);
   },
   _prevPage: function () {
-    AppActions.changePage(1);
+    AppActions.changePage(2);
   },
   _nextPage: function () {
     AppActions.updateReportInfo({
@@ -51,7 +54,7 @@ var Aggregate = React.createClass({
 
      });
 
-    AppActions.changePage(3);
+    AppActions.changePage(4);
   },
 
   _tableRows: function () {

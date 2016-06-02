@@ -3,12 +3,11 @@ var AppActions = require('../actions/appActions');
 var AppStore = require('../stores/appStore');
 
 var Scoring = React.createClass({
-
   _prevPage: function() {
-    AppActions.changePage(0);
+    AppActions.changePage(1);
   },
   _nextPage: function () {
-      AppActions.changePage(2);
+      AppActions.changePage(3);
   },
   render: function () {
 

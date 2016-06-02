@@ -5,6 +5,9 @@ var AppStore = require('../stores/appStore');
 
 var Index = React.createClass({
   mixins: [LinkedStateMixin],
+  componentDidMount: function(){
+    document.getElementById("name").focus();
+  },
   getInitialState: function () {
     return ({
       insName: AppStore.getReportInfo().insName || "",
@@ -18,7 +21,7 @@ var Index = React.createClass({
       effDate: this.state.effDate,
       garAddr: this.state.garAddr
     });
-      AppActions.changePage(1);
+      AppActions.changePage(2);
   },
   render: function () {
 

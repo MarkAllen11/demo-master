@@ -5,10 +5,10 @@ var AppStore = require('../stores/appStore');
 var RiskInsight = React.createClass({
 
   _prevPage: function() {
-    AppActions.changePage(3);
+    AppActions.changePage(4);
   },
   _nextPage: function () {
-      AppActions.changePage(5);
+      AppActions.changePage(6);
   },
   render: function () {
     return (
