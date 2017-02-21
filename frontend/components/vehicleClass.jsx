@@ -1,8 +1,9 @@
 var React = require('react');
 var AppActions = require('../actions/appActions');
+var LinkedStateMixin = require('react-addons-linked-state-mixin');
 
 var VehicleClass = React.createClass({
-
+  mixins: [LinkedStateMixin],  // added 2/12
   _nextPage: function (e) {
     e.preventDefault();
     AppActions.changePage(2);

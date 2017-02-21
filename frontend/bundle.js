@@ -27228,6 +27228,7 @@
 	    if (this._validCredentials(this.state.uname, this._hashPwd(this.state.pwd))) {
 	      AppActions.changePage(1);
 	    } else {
+	      //AppActions.changePage(1);
 	      alert('Username and Password Invalid');
 	      this.setState({ pwd: "" });
 	      document.getElementById("uname").focus();
@@ -27549,6 +27550,14 @@
 	var AppActions = __webpack_require__(193);
 	var LinkedStateMixin = __webpack_require__(194);
 	var AppStore = __webpack_require__(168);
+	var Sic;
+	var sicAct, sicRel;
+	var locAct, locRel;
+	var milesAct, milesRel;
+	var vehTypeAct, vehTypeRel;
+	var drvrBehaviroAct, drvrBehaviorRel;
+	var claimHistAct, claimHistRel;
+	var outObjTrendsAct, outObjTrendsRel;
 	
 	var Index = React.createClass({
 	  displayName: 'Index',
@@ -27565,10 +27574,74 @@
 	    };
 	  },
 	  _nextPage: function () {
+	
+	    Sic = document.getElementById("sicCode").value;
+	    switch (Sic) {
+	      case "1611":
+	        sicAct = 11;
+	        locAct = 8;
+	        milesAct = 17;
+	        vehTypeAct = 15;
+	        drvrBehaviorAct = 19;
+	        claimHistAct = 6;
+	        outObjTrendsAct = 6;
+	        break;
+	      case "4213":
+	        sicAct = 9;
+	        locAct = 20;
+	        milesAct = 23;
+	        vehTypeAct = 12;
+	        drvrBehaviorAct = 26;
+	        claimHistAct = 21;
+	        outObjTrendsAct = 7;
+	        break;
+	      case "4111":
+	        sicAct = 13;
+	        locAct = 9;
+	        milesAct = 20;
+	        vehTypeAct = 10;
+	        drvrBehaviorAct = 25;
+	        claimHistAct = 19;
+	        outObjTrendsAct = 9;
+	        break;
+	      default:
+	        sicAct = 10;
+	        locAct = 8;
+	        milesAct = 15;
+	        vehTypeAct = 10;
+	        drvrBehaviorAct = 18;
+	        claimHistAct = 5;
+	        outObjTrendsAct = 9;
+	    }
+	    sicRel = sicAct / 20;
+	    locRel = locAct / 10;
+	    milesRel = milesAct / 10;
+	    vehTypeRel = vehTypeAct / 20;
+	    drvrBehaviorRel = Math.round(drvrBehaviorAct * 0.45 * 100) / 100;
+	    claimHistRel = claimHistAct / 5;
+	    outObjTrendsRel = outObjTrendsAct / 20;
+	
 	    AppActions.updateReportInfo({
 	      insName: this.state.insName,
 	      effDate: this.state.effDate,
-	      garAddr: this.state.garAddr
+	      garAddr: this.state.garAddr,
+	      sic: this.state.sic,
+	      sicActual: sicAct,
+	      sicRelative: sicRel,
+	      locActual: locAct,
+	      locRelative: locRel,
+	      milesActual: milesAct,
+	      milesRelative: milesRel,
+	      vehTypeActual: vehTypeAct,
+	      vehTypeRelative: vehTypeRel,
+	      drvrBehaviorActual: drvrBehaviorAct,
+	      drvrBehaviorRelative: drvrBehaviorRel,
+	      claimsHistActual: claimHistAct,
+	      claimsHistRelative: claimHistRel,
+	      outObjTrendsActual: outObjTrendsAct,
+	      outObjTrendsRelative: outObjTrendsRel,
+	      totalRiskActual: Math.round((sicAct + locAct + milesAct + vehTypeAct + drvrBehaviorAct + claimHistAct + outObjTrendsAct) * 100) / 100,
+	      totalRiskRelative: Math.round((sicRel + locRel + milesRel + vehTypeRel + drvrBehaviorRel + claimHistRel + outObjTrendsRel) * 100) / 100
 	    });
 	    AppActions.changePage(2);
 	  },
@@ -27643,7 +27716,7 @@
 	          { htmlfor: 'sic' },
 	          'SIC'
 	        ),
-	        React.createElement('input', { type: 'text', id: 'sic' })
+	        React.createElement('input', { type: 'text', id: 'sicCode', valueLink: this.linkState('sic') })
 	      ),
 	      React.createElement(
 	        'div',
@@ -27881,6 +27954,7 @@
 	      insName: AppStore.getReportInfo().insName || "",
 	      effDate: AppStore.getReportInfo().effDate || "",
 	      garAddr: AppStore.getReportInfo().garAddr || "",
+	      sic: AppStore.getReportInfo().sic || "",
 	      ref: "",
 	      new: "",
 	      underwriter: "",
@@ -27891,7 +27965,7 @@
 	      twoYrClaimCount: "",
 	      threeYrClaimCount: "",
 	      primVehClass: "",
-	      totUnits: "",
+	      totUnits: AppStore.getReportInfo().totUnits || "",
 	      totPrem: "",
 	      totPowerUnits: "",
 	      totTrailers: "",
@@ -27910,6 +27984,7 @@
 	    AppActions.changePage(2);
 	  },
 	  _nextPage: function () {
+	
 	    AppActions.updateReportInfo({
 	      ref: this.state.ref,
 	      effDate: this.state.effDate,
@@ -27918,7 +27993,9 @@
 	      dot: this.state.dot,
 	      claimCount: this.state.claimCount,
 	      twoYrClaimCount: this.state.twoYrClaimCount,
-	      threeYrClaimCount: this.state.threeYrClaimCount
+	      threeYrClaimCount: this.state.threeYrClaimCount,
+	      totUnits: this.state.totUnits,
+	      sic: this.state.sic
 	
 	    });
 	
@@ -28201,11 +28278,12 @@
 
 	var React = __webpack_require__(1);
 	var AppActions = __webpack_require__(193);
+	var LinkedStateMixin = __webpack_require__(194);
 	
 	var VehicleClass = React.createClass({
 	  displayName: 'VehicleClass',
 	
-	
+	  mixins: [LinkedStateMixin], // added 2/12
 	  _nextPage: function (e) {
 	    e.preventDefault();
 	    AppActions.changePage(2);
@@ -28444,16 +28522,36 @@
 
 	var React = __webpack_require__(1);
 	var AppActions = __webpack_require__(193);
+	var LinkedStateMixin = __webpack_require__(194);
 	var AppStore = __webpack_require__(168);
+	var score = 0.0;
+	var isoManual;
 	
 	var IRReport = React.createClass({
 	  displayName: 'IRReport',
 	
-	
+	  mixins: [LinkedStateMixin], // added 2/12
+	  getInitialState: function () {
+	    return {
+	      totUnits: AppStore.getReportInfo().totUnits || "",
+	      effDate: AppStore.getReportInfo().effDate || "",
+	      garAddr: AppStore.getReportInfo().garAddr || "",
+	      sic: AppStore.getReportInfo().sic || "",
+	      isoManual: AppStore.getReportInfo().isoManual || ""
+	    };
+	  },
 	  _prevPage: function () {
 	    AppActions.changePage(3);
 	  },
 	  _nextPage: function () {
+	
+	    AppActions.updateReportInfo({
+	      sic: this.state.sic,
+	      totUnits: this.state.totUnits,
+	      score: score,
+	      isoManual: isoManual
+	    });
+	
 	    AppActions.changePage(5);
 	  },
 	
@@ -28463,7 +28561,25 @@
 	
 	    var d = new Date();
 	    var now = d.getMonth() + 1 + "/" + d.getDate() + "/" + d.getFullYear();
-	    var score = Math.floor(Math.random() * 10 + 90) / 100;
+	
+	    // var score = (Math.floor(Math.random() * (100 - 90) + 90))/100;
+	    switch (info.sic) {
+	      case "1611":
+	        score = 0.9;
+	        isoManual = 3024;
+	        break;
+	      case "4213":
+	        score = 1.01;
+	        isoManual = 4528;
+	        break;
+	      case "4111":
+	        score = 0.90;
+	        isoManual = 1926;
+	        break;
+	      default:
+	        score = 0.95;
+	        isoManual = 3150;
+	    }
 	
 	    return React.createElement(
 	      'div',
@@ -28640,19 +28756,39 @@
 	        )
 	      ),
 	      React.createElement(
-	        'div',
-	        { className: 'txt-Display' },
+	        'table',
+	        { className: 'reportTable' },
 	        React.createElement(
-	          'p',
-	          { width: '300px', align: 'center' },
-	          'Liability Risk Score'
-	        ),
-	        React.createElement(
-	          'p',
-	          { width: '300px', align: 'center' },
-	          score
+	          'thead',
+	          null,
+	          React.createElement(
+	            'tr',
+	            null,
+	            React.createElement(
+	              'td',
+	              { width: '300px', align: 'left' },
+	              'Liability Risk Score:'
+	            ),
+	            React.createElement(
+	              'td',
+	              null,
+	              score
+	            ),
+	            React.createElement(
+	              'td',
+	              { width: '300px', align: 'left' },
+	              'ISO Manual'
+	            ),
+	            React.createElement(
+	              'td',
+	              null,
+	              isoManual
+	            )
+	          )
 	        )
 	      ),
+	      React.createElement('br', null),
+	      React.createElement('br', null),
 	      React.createElement(
 	        'div',
 	        { className: 'submitButton' },
@@ -28681,18 +28817,23 @@
 
 	var React = __webpack_require__(1);
 	var AppActions = __webpack_require__(193);
+	var LinkedStateMixin = __webpack_require__(194);
 	var AppStore = __webpack_require__(168);
 	
 	var Scoring = React.createClass({
 	  displayName: 'Scoring',
 	
+	  mixins: [LinkedStateMixin], // added 2/12
 	  _prevPage: function () {
 	    AppActions.changePage(1);
 	  },
 	  _nextPage: function () {
+	
 	    AppActions.changePage(3);
 	  },
 	  render: function () {
+	
+	    var info = AppStore.getReportInfo();
 	
 	    return React.createElement(
 	      'div',
@@ -28731,16 +28872,6 @@
 	              React.createElement(
 	                'th',
 	                null,
-	                'Relevance Weight'
-	              ),
-	              React.createElement(
-	                'th',
-	                null,
-	                'Actual Score'
-	              ),
-	              React.createElement(
-	                'th',
-	                null,
 	                'Relative Score'
 	              )
 	            )
@@ -28754,199 +28885,12 @@
 	              React.createElement(
 	                'td',
 	                null,
-	                'SIC'
-	              ),
-	              React.createElement(
-	                'td',
-	                null,
-	                '5%'
-	              ),
-	              React.createElement(
-	                'td',
-	                null,
-	                '10'
-	              ),
-	              React.createElement(
-	                'td',
-	                null,
-	                '0.5'
-	              )
-	            ),
-	            React.createElement(
-	              'tr',
-	              null,
-	              React.createElement(
-	                'td',
-	                null,
-	                'Location of risk'
-	              ),
-	              React.createElement(
-	                'td',
-	                null,
-	                '10%'
-	              ),
-	              React.createElement(
-	                'td',
-	                null,
-	                '8'
-	              ),
-	              React.createElement(
-	                'td',
-	                null,
-	                '0.8'
-	              )
-	            ),
-	            React.createElement(
-	              'tr',
-	              null,
-	              React.createElement(
-	                'td',
-	                null,
-	                'Annual Miles'
-	              ),
-	              React.createElement(
-	                'td',
-	                null,
-	                '10%'
-	              ),
-	              React.createElement(
-	                'td',
-	                null,
-	                '15'
-	              ),
-	              React.createElement(
-	                'td',
-	                null,
-	                '1.5'
-	              )
-	            ),
-	            React.createElement(
-	              'tr',
-	              null,
-	              React.createElement(
-	                'td',
-	                null,
-	                'Vehicle Type'
-	              ),
-	              React.createElement(
-	                'td',
-	                null,
-	                '5%'
-	              ),
-	              React.createElement(
-	                'td',
-	                null,
-	                '10'
-	              ),
-	              React.createElement(
-	                'td',
-	                null,
-	                '0.5'
-	              )
-	            ),
-	            React.createElement(
-	              'tr',
-	              null,
-	              React.createElement(
-	                'td',
-	                null,
-	                'Driving Behavior'
-	              ),
-	              React.createElement(
-	                'td',
-	                null,
-	                '45%'
-	              ),
-	              React.createElement(
-	                'td',
-	                null,
-	                '18'
-	              ),
-	              React.createElement(
-	                'td',
-	                null,
-	                '8.1'
-	              )
-	            ),
-	            React.createElement(
-	              'tr',
-	              null,
-	              React.createElement(
-	                'td',
-	                null,
-	                'Claim History'
-	              ),
-	              React.createElement(
-	                'td',
-	                null,
-	                '20%'
-	              ),
-	              React.createElement(
-	                'td',
-	                null,
-	                '5'
-	              ),
-	              React.createElement(
-	                'td',
-	                null,
-	                '1'
-	              )
-	            ),
-	            React.createElement(
-	              'tr',
-	              null,
-	              React.createElement(
-	                'td',
-	                null,
-	                'Outside Objective Trends'
-	              ),
-	              React.createElement(
-	                'td',
-	                null,
-	                '5%'
-	              ),
-	              React.createElement(
-	                'td',
-	                null,
-	                '9'
-	              ),
-	              React.createElement(
-	                'td',
-	                null,
-	                '0.45'
-	              )
-	            ),
-	            React.createElement(
-	              'tr',
-	              { border: 'none' },
-	              React.createElement(
-	                'td',
-	                { colspan: '4' },
-	                ' '
-	              )
-	            ),
-	            React.createElement(
-	              'tr',
-	              null,
-	              React.createElement(
-	                'td',
-	                null,
 	                'TOTAL RISK GRADE.. Range 0-30'
 	              ),
 	              React.createElement(
 	                'td',
 	                null,
-	                '30'
-	              ),
-	              React.createElement(
-	                'td',
-	                null,
-	                '75'
-	              ),
-	              React.createElement(
-	                'td',
-	                null,
-	                '12.85'
+	                info.totalRiskRelative
 	              )
 	            )
 	          )
@@ -28981,12 +28925,21 @@
 
 	var React = __webpack_require__(1);
 	var AppActions = __webpack_require__(193);
+	var LinkedStateMixin = __webpack_require__(194);
 	var AppStore = __webpack_require__(168);
 	
 	var RiskInsight = React.createClass({
 	  displayName: 'RiskInsight',
 	
-	
+	  mixins: [LinkedStateMixin], // added 2/12
+	  getInitialState: function () {
+	    return {
+	      totUnits: AppStore.getReportInfo().totUnits || "",
+	      effDate: AppStore.getReportInfo().effDate || "",
+	      garAddr: AppStore.getReportInfo().garAddr || "",
+	      sic: AppStore.getReportInfo().sic || ""
+	    };
+	  },
 	  _prevPage: function () {
 	    AppActions.changePage(4);
 	  },
@@ -28994,12 +28947,33 @@
 	    AppActions.changePage(6);
 	  },
 	  render: function () {
+	
+	    var info = AppStore.getReportInfo();
+	
+	    var isoBaseRate = info.totUnits * info.isoManual;
+	    var prefPrice = Math.floor(isoBaseRate * 0.90 * 100) / 100;
+	    var basePrice = isoBaseRate;
+	    var surchargePrice = Math.floor(isoBaseRate * 1.1 * 100) / 100;
+	
+	    switch (info.sic) {
+	      case "1611":
+	        indenseoPricing = Math.floor(prefPrice * 0.932 * 100) / 100;
+	        break;
+	      case "4213":
+	        indenseoPricing = Math.floor(prefPrice * 0.895 * 100) / 100;
+	        break;
+	      case "4111":
+	        indenseoPricing = Math.floor(prefPrice * 0.94 * 100) / 100;
+	        break;
+	      default:
+	        indenseoPricing = Math.floor(prefPrice * 0.95 * 100) / 100;
+	    }
 	    return React.createElement(
 	      'div',
 	      { className: 'RiskInsight' },
 	      React.createElement(
 	        'div',
-	        { className: 'riskTableHighlight' },
+	        { className: 'riskTable' },
 	        React.createElement(
 	          'table',
 	          { caption: 'Preferred' },
@@ -29035,7 +29009,7 @@
 	              React.createElement(
 	                'td',
 	                null,
-	                '$50000'
+	                isoBaseRate
 	              ),
 	              React.createElement(
 	                'td',
@@ -29045,7 +29019,7 @@
 	              React.createElement(
 	                'td',
 	                null,
-	                '$45000'
+	                prefPrice
 	              )
 	            )
 	          )
@@ -29090,7 +29064,7 @@
 	              React.createElement(
 	                'td',
 	                null,
-	                '$50000'
+	                isoBaseRate
 	              ),
 	              React.createElement(
 	                'td',
@@ -29100,7 +29074,7 @@
 	              React.createElement(
 	                'td',
 	                null,
-	                '$50000'
+	                basePrice
 	              )
 	            )
 	          )
@@ -29145,7 +29119,7 @@
 	              React.createElement(
 	                'td',
 	                null,
-	                '$50000'
+	                isoBaseRate
 	              ),
 	              React.createElement(
 	                'td',
@@ -29155,12 +29129,54 @@
 	              React.createElement(
 	                'td',
 	                null,
-	                '$55000'
+	                surchargePrice
 	              )
 	            )
 	          )
 	        )
 	      ),
+	      React.createElement('br', null),
+	      React.createElement('br', null),
+	      React.createElement('br', null),
+	      React.createElement(
+	        'div',
+	        { className: 'riskTable' },
+	        React.createElement(
+	          'div',
+	          { className: 'riskTableHighlight' },
+	          React.createElement(
+	            'table',
+	            { caption: 'Indenseo Insight Pricing' },
+	            React.createElement(
+	              'thead',
+	              null,
+	              React.createElement(
+	                'tr',
+	                null,
+	                React.createElement(
+	                  'th',
+	                  null,
+	                  'Final Price'
+	                )
+	              )
+	            ),
+	            React.createElement(
+	              'tbody',
+	              null,
+	              React.createElement(
+	                'tr',
+	                null,
+	                React.createElement(
+	                  'td',
+	                  null,
+	                  indenseoPricing
+	                )
+	              )
+	            )
+	          )
+	        )
+	      ),
+	      React.createElement('br', null),
 	      React.createElement('br', null),
 	      React.createElement(
 	        'div',
@@ -29217,7 +29233,26 @@
 	      totPrem: "",
 	      totPowerUnits: "",
 	      totTrailers: "",
-	      totUnitsPriorTerm: ""
+	      totUnitsPriorTerm: "",
+	      sicActual: "",
+	      sic: "",
+	      sicRelative: "",
+	      sicActual: "",
+	      sicRelative: "",
+	      locActual: "",
+	      locRelative: "",
+	      milesActual: "",
+	      milesRelative: "",
+	      vehTypeActual: "",
+	      vehTypeRelative: "",
+	      drvrBehaviorActual: "",
+	      drvrBehaviorRelative: "",
+	      claimsHistActual: "",
+	      claimsHistRelative: "",
+	      outObjTrendsActual: "",
+	      outObjTrendsRelative: "",
+	      totalRiskActual: "",
+	      totalRiskRelative: ""
 	    });
 	    AppActions.changePage(1);
 	  },
@@ -29268,7 +29303,7 @@
 	        React.createElement(
 	          'h1',
 	          null,
-	          'IMPROVEMENT INCICATED'
+	          'IMPROVEMENT INDICATED'
 	        )
 	      ),
 	      React.createElement(

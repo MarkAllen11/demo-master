@@ -26,6 +26,7 @@ var Login = React.createClass({
         AppActions.changePage(1);
       } else
        {
+        //AppActions.changePage(1);
          alert ('Username and Password Invalid');
          this.setState({pwd: ""}) ;
          document.getElementById("uname").focus();
@@ -39,8 +40,8 @@ var Login = React.createClass({
         </div>
         <div className="txt-input-2col">
           <label htmlfor="uname">Username:</label>
-            <input type="text" id="uname" valueLink={this.linkState('uname')}/>
-          </div>
+          <input type="text" id="uname" valueLink={this.linkState('uname')}/>
+        </div>
           <div className="txt-input-2col">
             <label htmlfor="pwd">Password:</label>
             <input type="password" id="pwd" valueLink={this.linkState('pwd')}/>

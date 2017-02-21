@@ -33,6 +33,7 @@ var App = React.createClass({
 
     var pages = [<Login />, <Index /> , <Scoring />, <Aggregate />, <IRReport />, <RiskInsight />, <Dashboard />];
 
+
     return (
       <div className="main-container">
         <Navbar />

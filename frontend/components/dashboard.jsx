@@ -25,7 +25,26 @@ var Dashboard = React.createClass({
        totPrem: "",
        totPowerUnits: "",
        totTrailers: "",
-       totUnitsPriorTerm: ""
+       totUnitsPriorTerm: "",
+       sicActual:"",
+       sic:"",
+       sicRelative:"",
+       sicActual: "",
+       sicRelative: "",
+       locActual: "",
+       locRelative: "",
+       milesActual: "",
+       milesRelative: "",
+       vehTypeActual: "",
+       vehTypeRelative: "",
+       drvrBehaviorActual: "",
+       drvrBehaviorRelative: "",
+       claimsHistActual: "",
+       claimsHistRelative: "",
+       outObjTrendsActual: "",
+       outObjTrendsRelative: "",
+       totalRiskActual: "",
+       totalRiskRelative: ""
      });
     AppActions.changePage(1);
   },
@@ -37,7 +56,7 @@ var Dashboard = React.createClass({
 
       <div className="Dashboard">
       <div className="images">
-        <img src="images/Indenseo_Logo.png" />
+        <img src="images/Indenseo_Logo.png"/>
       </div>
       <div className="displayBox">
         <h1>Customer Portal and Dashboard</h1>
@@ -45,8 +64,9 @@ var Dashboard = React.createClass({
         <p>8.75</p><br />
         <p>Indenseo Benchmark RIS</p><br />
         <p>9</p><br />
-        <h1>IMPROVEMENT INCICATED</h1>
+        <h1>IMPROVEMENT INDICATED</h1>
       </div>
+
 
       <a className="hrefs" href="http://idrivesafely.cust.footprint.net/CoPilot/SC05/story.html" target="_blank">Online Targeted Driver Training</a>
       <br />
@@ -56,6 +76,7 @@ var Dashboard = React.createClass({
         <button onClick={this._firstPage}>Start Over</button>
       </div>
       </div>
+
     );
   }
 

@@ -2,6 +2,14 @@ var React = require('react');
 var AppActions = require('../actions/appActions');
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
 var AppStore = require('../stores/appStore');
+var Sic;
+var sicAct, sicRel;
+var locAct, locRel ;
+var milesAct, milesRel;
+var vehTypeAct, vehTypeRel;
+var drvrBehaviroAct, drvrBehaviorRel;
+var claimHistAct, claimHistRel;
+var outObjTrendsAct, outObjTrendsRel;
 
 var Index = React.createClass({
   mixins: [LinkedStateMixin],
@@ -12,14 +20,80 @@ var Index = React.createClass({
     return ({
       insName: AppStore.getReportInfo().insName || "",
       effDate: AppStore.getReportInfo().effDate || "",
-      garAddr: AppStore.getReportInfo().garAddr || "",
+      garAddr: AppStore.getReportInfo().garAddr || ""
     });
   },
  _nextPage: function () {
+
+   Sic = document.getElementById("sicCode").value;
+   switch (Sic) {
+     case "1611":
+        sicAct = 11;
+        locAct = 8;
+        milesAct = 17;
+        vehTypeAct = 15;
+        drvrBehaviorAct = 19;
+        claimHistAct = 6;
+        outObjTrendsAct = 6;
+        break;
+     case "4213":
+        sicAct = 9;
+        locAct = 20;
+        milesAct = 23;
+        vehTypeAct = 12;
+        drvrBehaviorAct = 26;
+        claimHistAct = 21;
+        outObjTrendsAct = 7;
+        break;
+      case "4111":
+         sicAct = 13;
+         locAct = 9;
+         milesAct = 20;
+         vehTypeAct = 10;
+         drvrBehaviorAct = 25;
+         claimHistAct = 19;
+         outObjTrendsAct = 9;
+         break;
+     default:
+       sicAct = 10;
+       locAct = 8;
+       milesAct = 15;
+       vehTypeAct = 10;
+       drvrBehaviorAct = 18;
+       claimHistAct = 5;
+       outObjTrendsAct = 9;
+   }
+   sicRel = sicAct / 20;
+   locRel = locAct / 10;
+   milesRel = milesAct / 10;
+   vehTypeRel = vehTypeAct / 20;
+   drvrBehaviorRel = Math.round((drvrBehaviorAct * 0.45)*100)/100;
+   claimHistRel = claimHistAct / 5;
+   outObjTrendsRel = outObjTrendsAct / 20
+
    AppActions.updateReportInfo({
       insName: this.state.insName,
       effDate: this.state.effDate,
-      garAddr: this.state.garAddr
+      garAddr: this.state.garAddr,
+      sic: this.state.sic,
+      sicActual: sicAct,
+      sicRelative: sicRel,
+      locActual: locAct,
+      locRelative: locRel,
+      milesActual: milesAct,
+      milesRelative: milesRel,
+      vehTypeActual: vehTypeAct,
+      vehTypeRelative: vehTypeRel,
+      drvrBehaviorActual: drvrBehaviorAct,
+      drvrBehaviorRelative: drvrBehaviorRel,
+      claimsHistActual: claimHistAct,
+      claimsHistRelative: claimHistRel,
+      outObjTrendsActual: outObjTrendsAct,
+      outObjTrendsRelative: outObjTrendsRel,
+      totalRiskActual: Math.round((sicAct + locAct + milesAct + vehTypeAct +
+        drvrBehaviorAct + claimHistAct + outObjTrendsAct)*100)/100,
+      totalRiskRelative: Math.round((sicRel + locRel + milesRel + vehTypeRel +
+          drvrBehaviorRel + claimHistRel + outObjTrendsRel)*100)/100
     });
       AppActions.changePage(2);
   },
@@ -54,7 +128,7 @@ var Index = React.createClass({
       </div>
       <div className="txt-input-2col">
         <label htmlfor="sic">SIC</label>
-        <input type="text"  id="sic"/>
+        <input type="text"  id="sicCode" valueLink={this.linkState('sic')} />
       </div>
 
       <div className="reportHeader">COVERAGES REQUESTED</div>

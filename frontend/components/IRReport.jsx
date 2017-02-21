@@ -1,13 +1,33 @@
 var React = require('react');
 var AppActions = require('../actions/appActions');
+var LinkedStateMixin = require('react-addons-linked-state-mixin');
 var AppStore = require('../stores/appStore');
+var score = 0.0;
+var isoManual;
 
 var IRReport = React.createClass({
-
+ mixins: [LinkedStateMixin],  // added 2/12
+ getInitialState: function () {
+   return ({
+     totUnits: AppStore.getReportInfo().totUnits || "",
+     effDate: AppStore.getReportInfo().effDate || "",
+     garAddr: AppStore.getReportInfo().garAddr || "",
+     sic: AppStore.getReportInfo().sic || "",
+     isoManual: AppStore.getReportInfo().isoManual || ""
+   })
+ },
   _prevPage: function() {
     AppActions.changePage(3);
   },
   _nextPage: function() {
+
+    AppActions.updateReportInfo({
+       sic: this.state.sic,
+       totUnits: this.state.totUnits,
+       score: score,
+       isoManual: isoManual
+     });
+
     AppActions.changePage(5);
   },
 
@@ -17,7 +37,25 @@ var IRReport = React.createClass({
 
     var d = new Date();
     var now = (d.getMonth()+1) + "/" + d.getDate() + "/" + d.getFullYear();
-    var score = (Math.floor((Math.random() * 10) + 90))/100;
+
+    // var score = (Math.floor(Math.random() * (100 - 90) + 90))/100;
+    switch (info.sic) {
+      case "1611":
+        score = 0.9;
+        isoManual = 3024;
+        break;
+      case "4213":
+        score = 1.01;
+        isoManual = 4528;
+        break;
+      case "4111":
+        score = 0.90;
+        isoManual = 1926;
+        break;
+      default:
+        score = 0.95;
+        isoManual = 3150;
+    }
 
     return (
 
@@ -42,10 +80,14 @@ var IRReport = React.createClass({
         <div className="reportHeader">
           <p>Underwriting Risk</p>
         </div>
-        <div className="txt-Display">
-          <p width='300px' align='center'>Liability Risk Score</p>
-          <p width='300px' align='center'>{score}</p>
-        </div>
+        <table className="reportTable">
+          <thead>
+          <tr><td width='300px' align='left'>Liability Risk Score:</td><td>{score}</td><td width='300px' align='left'>ISO Manual</td><td>{isoManual}</td></tr>
+          </thead>
+        </table>
+
+        <br/><br/>
+
 
         <div className="submitButton">
           <button onClick={this._prevPage}>Back</button>{" "}

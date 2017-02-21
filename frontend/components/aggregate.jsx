@@ -13,6 +13,7 @@ var Aggregate = React.createClass({
       insName: AppStore.getReportInfo().insName || "",
       effDate: AppStore.getReportInfo().effDate || "",
       garAddr: AppStore.getReportInfo().garAddr || "",
+      sic: AppStore.getReportInfo().sic || "",
       ref: "",
       new: "",
       underwriter: "",
@@ -23,7 +24,7 @@ var Aggregate = React.createClass({
       twoYrClaimCount: "",
       threeYrClaimCount: "",
       primVehClass: "",
-      totUnits: "",
+      totUnits: AppStore.getReportInfo().totUnits || "",
       totPrem: "",
       totPowerUnits: "",
       totTrailers: "",
@@ -42,6 +43,7 @@ var Aggregate = React.createClass({
     AppActions.changePage(2);
   },
   _nextPage: function () {
+
     AppActions.updateReportInfo({
        ref: this.state.ref,
        effDate: this.state.effDate,
@@ -50,7 +52,9 @@ var Aggregate = React.createClass({
        dot: this.state.dot,
        claimCount: this.state.claimCount,
        twoYrClaimCount: this.state.twoYrClaimCount,
-       threeYrClaimCount: this.state.threeYrClaimCount
+       threeYrClaimCount: this.state.threeYrClaimCount,
+       totUnits: this.state.totUnits,
+       sic: this.state.sic
 
      });
 
