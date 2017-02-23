@@ -91,7 +91,7 @@ var Scoring = React.createClass({
     </div><br/>
     <div className="submitButton">
       <button onClick={this._prevPage}>Back</button>{" "}
-      <button onClick={this._nextPage}>Submit</button>
+      <button onClick={this._nextPage}>Accept</button>
     </div>
 
     </div>
