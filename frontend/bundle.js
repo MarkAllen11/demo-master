@@ -28955,6 +28955,7 @@
 	    var isoBaseRate = info.totUnits * info.isoManual;
 	    var prefPrice = isoBaseRate * 0.90;
 	    var basePrice = formatCurrency(isoBaseRate, opts);
+	    var hiTable;
 	    //var surchargePrice = Math.floor((isoBaseRate * 1.1)*100)/100;
 	    var surchargePrice = isoBaseRate * 1.1;
 	    isoBaseRate = formatCurrency(isoBaseRate, opts);
@@ -28963,16 +28964,20 @@
 	    switch (info.sic) {
 	      case "1611":
 	        indenseoPricing = Math.floor(prefPrice * 0.932 * 100) / 100;
-	        //var x = document.getElementById("Preferred").cells;
+	        //debugger;
+	        hiTable = 'Preferred';
 	        //x[0].bgColor = "Yellow";
 	        break;
 	      case "4213":
 	        indenseoPricing = Math.floor(prefPrice * 0.895 * 100) / 100;
+	        hiTable = 'Base';
 	        break;
 	      case "4111":
 	        indenseoPricing = Math.floor(prefPrice * 0.94 * 100) / 100;
+	        hiTable = 'Preferred';
 	        break;
 	      default:
+	        hiTable = 'Base';
 	        indenseoPricing = Math.floor(prefPrice * 0.95 * 100) / 100;
 	    }
 	    indenseoPricing = formatCurrency(indenseoPricing, opts);
@@ -28983,7 +28988,7 @@
 	      { className: 'RiskInsight' },
 	      React.createElement(
 	        'div',
-	        { className: 'riskTable' },
+	        { className: hiTable === 'Preferred' ? 'riskTableHighlight' : "riskTable" },
 	        React.createElement(
 	          'table',
 	          { id: 'Preferred', caption: 'Preferred' },
@@ -29038,7 +29043,7 @@
 	      React.createElement('br', null),
 	      React.createElement(
 	        'div',
-	        { className: 'riskTable' },
+	        { className: hiTable === 'Base' ? 'riskTableHighlight' : "riskTable" },
 	        React.createElement(
 	          'table',
 	          { caption: 'Base' },
@@ -29093,7 +29098,7 @@
 	      React.createElement('br', null),
 	      React.createElement(
 	        'div',
-	        { className: 'riskTable' },
+	        { className: hiTable === 'Risk' ? 'riskTableHighlight' : "riskTable" },
 	        React.createElement(
 	          'table',
 	          { caption: 'Surcharge' },
@@ -29150,37 +29155,33 @@
 	      React.createElement('br', null),
 	      React.createElement(
 	        'div',
-	        { className: 'riskTable' },
+	        { className: 'riskTableHighlight' },
 	        React.createElement(
-	          'div',
-	          { className: 'riskTableHighlight' },
+	          'table',
+	          { caption: 'Indenseo Insight Pricing' },
 	          React.createElement(
-	            'table',
-	            { caption: 'Indenseo Insight Pricing' },
+	            'thead',
+	            null,
 	            React.createElement(
-	              'thead',
+	              'tr',
 	              null,
 	              React.createElement(
-	                'tr',
+	                'th',
 	                null,
-	                React.createElement(
-	                  'th',
-	                  null,
-	                  'Final Price'
-	                )
+	                'Final Price'
 	              )
-	            ),
+	            )
+	          ),
+	          React.createElement(
+	            'tbody',
+	            null,
 	            React.createElement(
-	              'tbody',
+	              'tr',
 	              null,
 	              React.createElement(
-	                'tr',
+	                'td',
 	                null,
-	                React.createElement(
-	                  'td',
-	                  null,
-	                  indenseoPricing
-	                )
+	                indenseoPricing
 	              )
 	            )
 	          )

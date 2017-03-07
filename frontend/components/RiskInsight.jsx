@@ -12,7 +12,7 @@ var RiskInsight = React.createClass({
      effDate: AppStore.getReportInfo().effDate || "",
      garAddr: AppStore.getReportInfo().garAddr || "",
      sic: AppStore.getReportInfo().sic || ""
-   })
+     })
  },
   _prevPage: function() {
     AppActions.changePage(4);
@@ -28,6 +28,7 @@ var RiskInsight = React.createClass({
     var isoBaseRate = info.totUnits * info.isoManual;
     var prefPrice = isoBaseRate * 0.90;
     var basePrice = formatCurrency(isoBaseRate, opts);
+    var hiTable;
     //var surchargePrice = Math.floor((isoBaseRate * 1.1)*100)/100;
     var surchargePrice = isoBaseRate * 1.1;
     isoBaseRate = formatCurrency(isoBaseRate, opts);
@@ -36,16 +37,20 @@ var RiskInsight = React.createClass({
     switch (info.sic) {
       case "1611":
         indenseoPricing = Math.floor((prefPrice * 0.932)*100)/100;
-        //var x = document.getElementById("Preferred").cells;
+        //debugger;
+        hiTable='Preferred';
         //x[0].bgColor = "Yellow";
         break;
       case "4213":
         indenseoPricing = Math.floor((prefPrice * 0.895)*100)/100;
+        hiTable = 'Base';
         break;
       case "4111":
         indenseoPricing = Math.floor((prefPrice * 0.94)*100)/100;
+        hiTable='Preferred';
         break;
       default:
+        hiTable='Base';
         indenseoPricing = Math.floor((prefPrice * 0.95)*100)/100;
     }
     indenseoPricing = formatCurrency(indenseoPricing, opts);
@@ -54,7 +59,7 @@ var RiskInsight = React.createClass({
     return (
 
       <div className="RiskInsight">
-      <div className="riskTable">
+      <div className={hiTable === 'Preferred' ? 'riskTableHighlight' : "riskTable"}>
         <table id="Preferred" caption="Preferred">
         <thead>
          <tr>
@@ -75,7 +80,7 @@ var RiskInsight = React.createClass({
 
       <br />
 
-      <div className="riskTable">
+      <div className={hiTable === 'Base' ? 'riskTableHighlight' : "riskTable"}>
       <table caption="Base">
       <thead>
        <tr>
@@ -95,7 +100,7 @@ var RiskInsight = React.createClass({
       </div>
       <br />
 
-      <div className="riskTable">
+      <div className={hiTable === 'Risk' ? 'riskTableHighlight' : "riskTable"}>
       <table caption="Surcharge">
       <thead>
        <tr>
@@ -115,7 +120,7 @@ var RiskInsight = React.createClass({
       </div>
       <br /><br /><br />
 
-      <div className="riskTable">
+
       <div className="riskTableHighlight">
       <table caption="Indenseo Insight Pricing">
       <thead>
@@ -130,7 +135,7 @@ var RiskInsight = React.createClass({
        </tbody>
       </table>
       </div>
-      </div>
+
       <br/><br/>
       <div className="submitButton">
         <button onClick={this._prevPage}>Back</button>{" "}
